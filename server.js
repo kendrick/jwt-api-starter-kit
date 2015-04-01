@@ -7,9 +7,9 @@
     var morgan = require('morgan');
     var mongoose = require('mongoose');
     var port = process.env.PORT || 8080;
-
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json());
+    var argv = process.argv.slice(2);
+    var env  = argv[0] || 'dev';
+    var config = require('./config')[env];
 
     app.use(function (req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,19 +18,15 @@
         next();
     });
 
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+
     app.use(morgan('dev'));
 
-    app.get('/', function (req, res) {
-        res.send('Got /.');
-    });
+    mongoose.connect(config.databaseUri);
 
-    var apiRouter = express.Router();
-    apiRouter.get('/', function (req, res) {
-        res.json({message: 'Got /api.'});
-    });
-
+    var apiRouter = require('./routes');
     app.use('/api', apiRouter);
-
     app.listen(port);
     console.log('Listening on port ' + port);
 })();
