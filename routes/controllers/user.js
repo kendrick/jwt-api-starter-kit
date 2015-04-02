@@ -31,6 +31,16 @@
         });
     };
 
+    exports.getUsers = function (req, res) {
+        User.find(function (err, users) {
+            if (err) {
+                res.send(err);
+            }
+
+            res.json(users);
+        });
+    };
+
     exports.getUser = function (req, res) {
         User.findById(req.params.userId, function (err, user) {
             if (err) {
@@ -39,5 +49,49 @@
 
             res.json(user);
         });
+    };
+
+    exports.putUser = function (req, res) {
+        User.findById(req.params.userId, function (err, user) {
+            if (err) {
+                res.send(err);
+            }
+
+            // TODO: Replace prop-by-prop updates with something like this: http://stackoverflow.com/a/21269522
+            if (req.body.name) {
+                user.name = req.body.name;
+            }
+
+            if (req.body.name) {
+                user.username = req.body.username;
+            }
+
+            if (req.body.password) {
+                user.password = req.body.password;
+            }
+
+            user.save(function (err) {
+                if (err) {
+                   res.send(err);
+                }
+
+                res.json({ message: 'User updated.' });
+            });
+        });
+    };
+
+    exports.deleteUser = function (req, res) {
+        User.remove(
+            {
+                _id: req.params.userId
+            },
+            function (err, user) {
+                if (err) {
+                    return res.send(err);
+                }
+
+                res.json({ message: 'User ' + req.params.userId + ' deleted.' });
+            }
+        );
     };
 })();
