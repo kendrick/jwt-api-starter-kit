@@ -3,11 +3,13 @@
 
     var router = require('express').Router();
 
-    var routes = ['users'];
+    var routes = ['auth', 'users'];
 
-    module.exports = (function () {
+    module.exports = function (config) {
+        console.dir(config);
+
         routes.map(function (routeName) {
-            require('./' + routeName)(router);
+            require('./' + routeName)(router, config);
         });
 
         router.get('/', function (req, res) {
@@ -15,5 +17,5 @@
         });
 
         return router;
-    })();
+    };
 })();

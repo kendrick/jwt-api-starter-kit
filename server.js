@@ -25,7 +25,7 @@
 
     mongoose.connect(config.databaseUri);
 
-    var apiRouter = require('./routes');
+    var apiRouter = require('./routes')(config);
     app.use('/api', apiRouter);
     app.listen(port);
     console.log('Listening on port ' + port);
