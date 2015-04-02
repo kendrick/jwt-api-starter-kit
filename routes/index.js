@@ -6,8 +6,6 @@
     var routes = ['auth', 'users'];
 
     module.exports = function (config) {
-        console.dir(config);
-
         routes.map(function (routeName) {
             require('./' + routeName)(router, config);
         });
