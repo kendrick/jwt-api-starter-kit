@@ -4,7 +4,6 @@
     var User = require('app/models/user');
 
     exports.postUser = function (req, res) {
-        console.dir(req.body);
         var user = new User();
         var DUPLICATE_KEY_ERROR = 11000;
 
