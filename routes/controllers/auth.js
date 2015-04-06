@@ -2,16 +2,9 @@
     'use strict';
 
     var User = require('app/models/user');
-    var jwt  = require('jsonwebtoken');
-    var jwtSecret = '';
-
-    exports.init = function (jwts) {
-        jwtSecret = jwts;
-    };
+    var authenticationHelper = require('root/common/authenticationHelper');
 
     exports.postAuth = function (req, res) {
-        var EXPIRES_IN_MINUTES = 60 * 24 * 180;
-
         User.findOne({
                 username: req.body.username
             })
@@ -37,16 +30,7 @@
                         });
                     }
                     else {
-                        var token = jwt.sign(
-                            {
-                                name: user.name,
-                                username: user.username
-                            },
-                            jwtSecret,
-                            {
-                                expiresInMinutes: EXPIRES_IN_MINUTES
-                            }
-                        );
+                        var token = authenticationHelper.getToken({ name: user.name, username: user.username });
 
                         res.json(
                             {

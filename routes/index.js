@@ -5,9 +5,9 @@
 
     var routes = ['auth', 'users'];
 
-    module.exports = function (config) {
+    module.exports = function () {
         routes.map(function (routeName) {
-            require('./' + routeName)(router, config);
+            require('./' + routeName)(router);
         });
 
         router.get('/', function (req, res) {
