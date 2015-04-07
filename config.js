@@ -9,8 +9,8 @@
         }
     });
 
-    module.exports = function (environment) {
-        var env = environment || process.argv.slice(2)[0] || 'dev';
+    module.exports = function () {
+        var env = process.argv.slice(2)[0] || 'dev';
 
         return config[env];
     };
