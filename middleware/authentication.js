@@ -4,7 +4,7 @@
     var authenticationHelper = require('root/common/authenticationHelper.js');
 
     function verifyToken(req, res, next) {
-        var token = req.body.token || req.params.token || req.headers['x-access-token'];
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
         if (token) {
             authenticationHelper.verifyToken(token, function (err, decoded) {
