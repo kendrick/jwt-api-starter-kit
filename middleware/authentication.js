@@ -15,6 +15,8 @@
                     });
                 }
                 else {
+                    // TODO: Check original_iat, exp, etc. to enforce expiration/refresh
+
                     req.decoded = decoded;
                     next();
                 }

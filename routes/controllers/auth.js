@@ -30,7 +30,13 @@
                         });
                     }
                     else {
-                        var token = authenticationHelper.getToken({ name: user.name, username: user.username });
+                        // TODO: Abstract payload creation into an authorization helper
+                        var payload = {
+                            name: user.name,
+                            username: user.username
+                        };
+
+                        var token = authenticationHelper.getToken(payload);
 
                         res.json(
                             {
