@@ -5,6 +5,9 @@
         var userController = require('./controllers/user');
         var authMw = require('root/middleware/authentication');
 
+        router.route('/me')
+            .get(userController.getMe);
+
         router.route('/users')
             .post(userController.postUser)
             .get(

@@ -3,6 +3,18 @@
 
     var User = require('app/models/user');
 
+    exports.getMe = function (req, res) {
+        if (req.decoded) {
+            res.send(req.decoded);
+        }
+        else {
+            res.status(403).send({
+                success: false,
+                message: 'You must be logged in to access this resource.'
+            });
+        }
+    };
+
     exports.postUser = function (req, res) {
         var user = new User();
         var DUPLICATE_KEY_ERROR = 11000;
