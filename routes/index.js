@@ -3,7 +3,7 @@
 
     var router = require('express').Router();
 
-    var routes = ['auth', 'users'];
+    var routes = ['authentication', 'users'];
 
     module.exports = function () {
         routes.map(function (routeName) {
