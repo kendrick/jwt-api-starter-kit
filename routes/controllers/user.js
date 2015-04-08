@@ -2,6 +2,7 @@
     'use strict';
 
     var User = require('app/models/user');
+    var dataHelper = require('root/common/dataHelper');
 
     exports.getMe = function (req, res) {
         if (req.decoded) {
@@ -68,18 +69,7 @@
                 res.send(err);
             }
 
-            // TODO: Replace prop-by-prop updates with something like this: http://stackoverflow.com/a/21269522
-            if (req.body.name) {
-                user.name = req.body.name;
-            }
-
-            if (req.body.name) {
-                user.username = req.body.username;
-            }
-
-            if (req.body.password) {
-                user.password = req.body.password;
-            }
+            dataHelper.updateDocument(user, User, req.body);
 
             user.save(function (err) {
                 if (err) {

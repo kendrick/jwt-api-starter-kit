@@ -17,7 +17,7 @@
         if (!user.isModified('password')) {
             return next();
         }
-
+console.log('password: ' + user.password);
         bcrypt.hash(user.password, null, null, function (err, hash) {
             if (err) {
                 return next(err);
