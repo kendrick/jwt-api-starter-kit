@@ -4,6 +4,7 @@
     module.exports = function (router) {
         var userController = require('./controllers/user');
         var authenticationMw = require('root/middleware/authentication');
+        var authorizationMw = require('root/middleware/authorization');
 
         router.route('/me')
             .get(userController.getMe);
@@ -11,7 +12,7 @@
         router.route('/users')
             .post(userController.postUser)
             .get(
-                function (req, res, next) { return authenticationMw.verifyToken(req, res, next); },
+                authenticationMw.verifyToken,
                 userController.getUsers
             )
         ;
@@ -19,8 +20,14 @@
         router.use('/users/:userId', authenticationMw.verifyToken);
         router.route('/users/:userId')
             .get(userController.getUser)
-            .put(userController.putUser)
-            .delete(userController.deleteUser)
+            .put(
+                authorizationMw.mustBeSameUser,
+                userController.putUser
+            )
+            .delete(
+                authorizationMw.mustBeSameUser,
+                userController.deleteUser
+            )
         ;
     };
 })();
