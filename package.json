@@ -1,7 +1,7 @@
 {
-  "name": "writely",
+  "name": "jwtApiStarterKit",
   "version": "0.1.0",
-  "description": "Write anything about anything from anywhere.",
+  "description": "Starter kit for JWT-authenticated API.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

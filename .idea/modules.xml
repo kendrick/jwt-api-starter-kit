@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/writely.iml" filepath="$PROJECT_DIR$/.idea/writely.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/jwtApiStarterKit.iml" filepath="$PROJECT_DIR$/.idea/jwtApiStarterKit.iml" />
     </modules>
   </component>
 </project>

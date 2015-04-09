@@ -3,7 +3,7 @@
 
     var config = Object.freeze({
         dev: {
-            databaseUri: 'mongodb://localhost:27017/writely',
+            databaseUri: 'mongodb://localhost:27017/jwtApiStarterKit',
             jwtSecret  : require('fs').readFileSync('./jwtSecret.txt', 'utf8'),
             tokenExpirationInMinutes: 60 * 24 * 180
         }
